@@ -37,7 +37,7 @@ const HomeScreen = () => {
         <Tab.Screen name="Search" component={Search} options={{headerShown:false}} />
         <Tab.Screen name="Books" component={BookList} options={{headerShown:false}} />
 
-{true &&  <Tab.Screen name="Add Book" component={AddBook} options={{headerShown:false}} />
+{false &&  <Tab.Screen name="Add Book" component={AddBook} options={{headerShown:false}} />
 }
     </Tab.Navigator>
 </NavigationContainer>

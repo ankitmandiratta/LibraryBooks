@@ -2,22 +2,24 @@ import { Text, View,TouchableOpacity,TextInput,Alert } from 'react-native'
 import React,{useState} from 'react';
 import { styles } from '../../style';
 import { firebase } from '@react-native-firebase/firestore';
-const AuthorSearch = () => {
-    const [search,setSearch] = useState('power')
+import { NavigationContainer } from '@react-navigation/native';
+const AuthorSearch = (props) => {
+  const {navigation} = props
+  const [search,setSearch] = useState('')
 
     const checkDetails =()=>{
       if(search !=''){
-        console.log("data is on the way1" + search)
-       
         const db= firebase.firestore()
-        console.log(search)
-        db.collection("books").where('TITLE','>=',search).where('TITLE','<=',search + '\uf8ff').get().then((querySnapshot)=>{
-          console.log("data is on the way 3")  
-          querySnapshot.forEach((doc)=>{
-              console.log("data is on the way 2")
-              console.log(doc.data()) 
-            })
-        }).catch((error)=>{console.log("Erro Getting documents :",error)
+        db.collection('books').doc(search).get()
+        .then((doc)=>{
+          if(doc.exists){
+            navigation.navigate('BookDetails',{data:doc.data()})
+            console.log(doc.data()) 
+          }
+          else{
+Alert.alert('No Book Found','There is no book with this Accession number')
+          }
+          }).catch((error)=>{console.log("Erro Getting documents :",error)
 
         })
         console.log(search)
@@ -28,12 +30,17 @@ const AuthorSearch = () => {
     }
   return (
     <View style={styles.center}>
-      <TextInput placeholder='Author/Title/Accession Number of Book' style={styles.textinput_text}
+      <TextInput placeholder='Search Book by Accession Number' style={styles.textinput_text}
       value={search} onChangeText={(value)=>{setSearch(value)}}
        />
     <TouchableOpacity style={styles.btn_view} onPress={()=>checkDetails()}>
-    <Text style={styles.btn_text}> Search Book</Text>
+    <Text style={styles.btn_text}> Search Book </Text>
     </TouchableOpacity>
+
+    <TouchableOpacity style={{}} onPress={()=>navigation.navigate('Title')}>
+    <Text style={{}}> Search By Title</Text>
+    </TouchableOpacity>
+
     </View>
   )}
 export default AuthorSearch

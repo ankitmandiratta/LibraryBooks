@@ -1,4 +1,4 @@
-import {  Text, View,ScrollView,FlatList,Image,TouchableOpacity } from 'react-native'
+import {  Text, View,ScrollView,FlatList,Image,TouchableOpacity,ActivityIndicator } from 'react-native'
 import React,{useState,useEffect} from 'react'
 import { firebase } from '@react-native-firebase/firestore'
 import { Header } from '../../components'
@@ -7,14 +7,18 @@ import { useNavigation } from '@react-navigation/native'
 const BookList = (props) => {
 
 useEffect(()=>{
-    db_book_entry()
-console.log('Book lIst Page')
+
+ db_book_entry()
+
 },[])
 
 const navigation = useNavigation();
 const [book,setBook]= useState()
+
 const db_book_entry = ()=>{
-var data=[] ;
+
+  var data=[] ;
+
   firebase.firestore().collection('books').get().then((snapshot)=>{
     snapshot.forEach((doc)=>{
       data.push({...doc.data(),'id':doc.id})
@@ -42,6 +46,7 @@ return(
 )}
 //main return 
   return (
+
 <View>
   <Header title="Book List" />
   <View style={styles.starting}>

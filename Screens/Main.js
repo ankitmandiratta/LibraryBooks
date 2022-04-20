@@ -3,7 +3,7 @@ import React,{useState} from 'react'
 import {SignIn,SignInNavigation} from './authScreens'
 import HomeScreen from './HomeScreen'
 const Main = () => {
-    const [isUserSignedIn,setIsUserSignedIn] =useState(false)
+    const [isUserSignedIn,setIsUserSignedIn] =useState(true)
   return (
     <SafeAreaView style={{flex:1}}>
         {isUserSignedIn?<HomeScreen />:<SignInNavigation />}

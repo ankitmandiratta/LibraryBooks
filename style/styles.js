@@ -74,7 +74,19 @@ const styles = StyleSheet.create({
     color:COLORS.black,
     fontSize:SIZES.h4,
     marginLeft:10
-}
+},
+bookdetails_view:{
+    flexDirection:'row',
+    marginVertical:10
+},
+bookdetails_label:{
+    color:COLORS.black,
+    fontSize:SIZES.h3
+},
+bookdetails_text:{
+    color:COLORS.mitti,
+    fontSize:SIZES.h3
+},
 
 
 
