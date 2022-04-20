@@ -14,7 +14,7 @@ useEffect(()=>{
 
 },[])
 
-const navigation = useNavigation();
+const {navigation} = props
 const [book,setBook]= useState()
 
 const db_book_entry = ()=>{
@@ -35,7 +35,7 @@ const renderBook=({item})=>{
 return(
   <View style={styles.booklist_view}>
 
-<TouchableOpacity onPress={()=>{console.log(item)}}>
+<TouchableOpacity onPress={()=>{console.log(item),navigation.navigate('BookDetails',{data:item})}}>
 
   <Text style={styles.booklist_title} >{item.TITLE.toUpperCase()}</Text>
 <Text style={styles.booklist_author}>Author : {item.AUTHOR}</Text>
