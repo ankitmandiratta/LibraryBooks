@@ -4,6 +4,8 @@ import { firebase } from '@react-native-firebase/firestore'
 import { Header } from '../../components'
 import { styles } from '../../style'
 import { useNavigation } from '@react-navigation/native'
+import { COLORS, SIZES } from '../../constants'
+
 const BookList = (props) => {
 
 useEffect(()=>{
@@ -44,6 +46,26 @@ return(
 
 
 )}
+
+const Data =()=>{
+  return(
+    <View>
+<FlatList
+  data={book}
+  renderItem={renderBook}
+  />
+    </View>
+  )
+}
+
+const NoData=()=>{
+  return(
+    <View style={{justifyContent:'center',alignContent:'center',alignItems:'center',height:SIZES.height*1}}>
+      <ActivityIndicator size={"large"} color={COLORS.mitti} />
+
+    </View>
+  )
+}
 //main return 
   return (
 
@@ -51,11 +73,9 @@ return(
   <Header title="Book List" />
   <View style={styles.starting}>
 <View style={{marginVertical:10}}></View>
-  <FlatList
-  data={book}
-  renderItem={renderBook}
-  />
-    </View>
+
+{book ==null ?NoData():Data()}
+     </View>
    </View>
    )
 }
