@@ -1,85 +1,66 @@
-import { View, Text,TextInput,TouchableOpacity,Modal } from 'react-native'
+import { View, Text,TextInput,TouchableOpacity,Modal,Alert } from 'react-native'
 import React,{useState} from 'react'
 import { styles } from '../../style'
-import auth from '@react-native-firebase/auth'
-const SignIn = () => {
-
-  const [mob,setMob] = useState('+91 7740971201')
-  const [confirm,setConfirm] = useState(null)
-  const [code,setCode] = useState('')
+import { COLORS } from '../../constants'
+import auth, { firebase } from '@react-native-firebase/auth'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+const SignIn = (props) => {
+const {navigation} = props
+   const [email,setEmail] = useState('')
+   const [password,setPassword] = useState('')  
   
-  
+   
 
-  const signInWithPhone=async()=>{
-    const confirmation=  await auth().signInWithPhoneNumber(mob)
-    setConfirm(confirmation)    
-  }
-
-  const checkDetails_otp=async()=>{
-    if(code != ''){
-
-      try{
-        await confirm.confirm(code)
-      alert("Signed In successfully")
-      }
-      catch(error){
-        Alert.alert("Invalid Code","The must be some error .Please try again later")
-      }
-      console.log(code)
-
-      }
-    else {
-        Alert.alert('Missing OTP','Enter the OTP to proceed further')
+  const chekDetails_email=async()=>{
+    if(email =='' && password==''){
+      alert('Please Enter Email and Password');
     }
-}
-
-    const chekDetails=async()=>{  
-    if(mob.length != 0){
-    signInWithPhone()
-}
+    else if(password.length <6){
+      alert("Password must be atleast 6 alphanumeric")
+    }
     else{
-        console.log('Mobile no error')
+           console.log("Authenticae process") 
+
+       firebase.auth().signInWithEmailAndPassword(email,password)
+       .then((user)=>{
+         if(user.user.emailVerified){
+  //         navigation.navigate("Home")
+  console.log(user)   
+  console.log('Move to Home')    
+  var uid =user.user.uid
+    Astorage(uid)
+
+  }
+         else{
+           Alert.alert('Email verification Failed','Email is not verified.Please open your email account and verify')
+         }
+
+       })
     }
   }
 
-  if(confirm){
-    return(
-      <View>
-<Modal>
-<View style={styles.center}>
-    <View>
-    <TextInput placeholder="Enter OTP received on SMS" keyboardType='numeric' style={styles.textinput_text} value={code} onChangeText={(value)=>{setCode(value)}}  />
-    </View>
-    
-    <View style={styles.btn_view}>
-        <TouchableOpacity onPress={()=>{console.log(code),checkDetails_otp()}}>
-            <Text style={styles.btn_text}>Confirm OTP</Text>
-        </TouchableOpacity>
-    </View>
-    </View>
-
-
-
-</Modal>
-</View>
-    ) }
-  
-  
+  const Astorage =async(uid)=>{
+    await AsyncStorage.setItem('userId',uid)
+    navigation.navigate('Home')
+  }
   return (
     <View style={styles.center}>
-      
-<View>
-<TextInput placeholder="Mobile Number" keyboardType='numeric' style={styles.textinput_text} value={mob} onChangeText={(value)=>{setMob(value)}}  />
-</View>
 
+<View>
+<TextInput placeholder="Email Address" style={styles.textinput_text} value={email} onChangeText={(value)=>{setEmail(value)}}  />
+<View style={{margin:5}}></View>
+<TextInput placeholder="Password "  style={styles.textinput_text} value={password} onChangeText={(value)=>{setPassword(value)}}  />
+</View>
+<View></View>
 <View style={styles.btn_view}>
-    <TouchableOpacity onPress={()=>{chekDetails()}}>
-        <Text style={styles.btn_text}>SEND OTP</Text>
+    <TouchableOpacity onPress={()=>{chekDetails_email()}}>
+        <Text style={styles.btn_text}>Login</Text>
     </TouchableOpacity>
 </View>
+<TouchableOpacity onPress={()=>{navigation.navigate('SignUp')}}><Text>Not Registered!!!!</Text>
+<Text style={{color:COLORS.mitti,fontWeight:'bold'}}>Click here to SignUp</Text></TouchableOpacity>
 
-
-    </View>
+</View>
   )
 }
 

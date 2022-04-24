@@ -1,8 +1,10 @@
 import { Text, View,TouchableOpacity,TextInput,Alert } from 'react-native'
 import React,{useState} from 'react';
 import { styles } from '../../style';
+import LogOut from '../../components/LogOut';
 import { firebase } from '@react-native-firebase/firestore';
 import { NavigationContainer } from '@react-navigation/native';
+import { COLORS,SIZES } from '../../constants';
 const AuthorSearch = (props) => {
   const {navigation} = props
   const [search,setSearch] = useState('')
@@ -29,8 +31,11 @@ Alert.alert('No Book Found','There is no book with this Accession number')
       }
     }
   return (
-    <View style={styles.center}>
-      <TextInput placeholder='Search Book by Accession Number' style={styles.textinput_text}
+
+<View style={{flex:1}}>  
+<LogOut />
+<View style={{...styles.center}}>
+      <TextInput placeholder='Searchh Book by Accession Number' style={styles.textinput_text}
       value={search} onChangeText={(value)=>{setSearch(value)}}
        />
     <TouchableOpacity style={styles.btn_view} onPress={()=>checkDetails()}>
@@ -41,6 +46,7 @@ Alert.alert('No Book Found','There is no book with this Accession number')
     <Text style={{}}> Search By Title</Text>
     </TouchableOpacity>
 
+    </View>
     </View>
   )}
 export default AuthorSearch

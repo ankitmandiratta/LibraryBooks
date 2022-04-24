@@ -35,9 +35,9 @@ const renderBook=({item})=>{
 return(
   <View style={styles.booklist_view}>
 
-<TouchableOpacity onPress={()=>{console.log(item),navigation.navigate('BookDetails',{data:item})}}>
+<TouchableOpacity onPress={()=>{navigation.navigate('BookDetails',{data:item})}}>
 
-  <Text style={styles.booklist_title} >{item.TITLE.toUpperCase()}</Text>
+  <Text style={styles.booklist_title} >{item.TITLE}</Text>
 <Text style={styles.booklist_author}>Author : {item.AUTHOR}</Text>
 <Text style={styles.booklist_publisher}>Publisher : {item.PUBLISHER}</Text>
 <Text style={styles.booklist_publisher}>Location : {item.PLACE}</Text>

@@ -2,6 +2,7 @@ import { Text, View,TouchableOpacity,TextInput,Alert } from 'react-native'
 import React,{useState} from 'react';
 import { styles } from '../../style';
 import { firebase } from '@react-native-firebase/firestore';
+import LogOut from '../../components/LogOut';
 import { NavigationContainer } from '@react-navigation/native';
 const TitleSearch = (props) => {
   const {navigation} = props
@@ -13,23 +14,20 @@ const TitleSearch = (props) => {
         db.collection('books').where("TITLE" ,'==',search).get()
         .then((querySnapshot)=>{
           querySnapshot.forEach((doc)=>{
-
                 navigation.navigate('BookDetails',{data:doc.data()})
-
-          
                })   
 
           }).catch((error)=>{console.log("Erro Getting documents :",error)
-
-        })
-       
-      }
+ })
+             }
       else{
        Alert.alert("No Value Entered","Enter Author or Title or Accession Number for search") 
       }
     }
   return (
-    <View style={styles.center}>
+<View style={{flex:1}}>
+<LogOut />
+<View style={styles.center}>
       <TextInput placeholder='Search  Book By Title' style={styles.textinput_text}
       value={search} onChangeText={(value)=>{setSearch(value)}}
        />
@@ -42,6 +40,7 @@ const TitleSearch = (props) => {
     </TouchableOpacity>
 
 
+    </View>
     </View>
   )}
 export default TitleSearch

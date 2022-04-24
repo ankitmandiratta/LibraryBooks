@@ -87,7 +87,13 @@ bookdetails_text:{
     color:COLORS.mitti,
     fontSize:SIZES.h3
 },
-
+signInUp_text:{
+    backgroundColor:COLORS.mitti,
+    paddingVertical:5,
+    paddingHorizontal:15,
+    borderRadius:5,
+    color:COLORS.white
+}
 
 
 })
