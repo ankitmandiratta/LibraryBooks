@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     flex:1
     },
     header_view:{
-        backgroundColor:COLORS.blue,
+        backgroundColor:COLORS.mitti,
         height:SIZES.height*0.06
     },
     header_text:{

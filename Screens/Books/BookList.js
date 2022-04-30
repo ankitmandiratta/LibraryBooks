@@ -5,6 +5,7 @@ import { Header } from '../../components'
 import { styles } from '../../style'
 import { useNavigation } from '@react-navigation/native'
 import { COLORS, SIZES } from '../../constants'
+import Add from '../Add'
 
 const BookList = (props) => {
 
@@ -37,7 +38,7 @@ return(
 
 <TouchableOpacity onPress={()=>{navigation.navigate('BookDetails',{data:item})}}>
 
-  <Text style={styles.booklist_title} >{item.TITLE}</Text>
+ <Text style={styles.booklist_title} >{item.TITLE}</Text>
 <Text style={styles.booklist_author}>Author : {item.AUTHOR}</Text>
 <Text style={styles.booklist_publisher}>Publisher : {item.PUBLISHER}</Text>
 <Text style={styles.booklist_publisher}>Location : {item.PLACE}</Text>
@@ -50,10 +51,16 @@ return(
 const Data =()=>{
   return(
     <View>
+  <Add />
+  <View style={{justifyContent:'center',marginBottom:5,alignContent:'center',alignItems:'center'}}>
+    <Text style={{fontSize:SIZES.h2,color:COLORS.black,fontWeight:'bold'}}>Book List</Text>
+  <Text style={{color:COLORS.black}}>(Keep Scroling downwards )</Text>
+  </View>
 <FlatList
   data={book}
   renderItem={renderBook}
   />
+
     </View>
   )
 }

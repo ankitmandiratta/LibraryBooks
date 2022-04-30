@@ -4,6 +4,7 @@ import { styles } from '../../style'
 import auth, { firebase } from '@react-native-firebase/auth'
 import { COLORS } from '../../constants'
 import SignIn from './SignIn'
+import Add from '../Add'
 
 const SignUp = (props) => {
     const {navigation} = props
@@ -36,8 +37,10 @@ const SignUp = (props) => {
   }
   return (
     <View style={styles.center}>
+  
 
 <View>
+
 <TextInput placeholder="Email Address" style={styles.textinput_text} value={email} onChangeText={(value)=>{setEmail(value)}}  />
 <View style={{margin:5}}></View>
 <TextInput placeholder="Password "  style={styles.textinput_text} value={password} onChangeText={(value)=>{setPassword(value)}}  />
@@ -50,6 +53,13 @@ const SignUp = (props) => {
 </View>
 <TouchableOpacity onPress={()=>{navigation.navigate('SignIn')}}><Text>Already Registered.</Text>
 <Text style={{color:COLORS.mitti}}>Click here to Sign In</Text></TouchableOpacity>
+<View style={{marginTop:50}}><Add /></View>
+
+
+
+
+
+
 </View>
   )
 

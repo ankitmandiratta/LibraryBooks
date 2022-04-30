@@ -5,10 +5,14 @@ import LogOut from '../../components/LogOut';
 import { firebase } from '@react-native-firebase/firestore';
 import { NavigationContainer } from '@react-navigation/native';
 import { COLORS,SIZES } from '../../constants';
+import Add from '../Add';
+
+
+
 const AuthorSearch = (props) => {
   const {navigation} = props
   const [search,setSearch] = useState('')
-
+ 
     const checkDetails =()=>{
       if(search !=''){
         const db= firebase.firestore()
@@ -34,6 +38,8 @@ Alert.alert('No Book Found','There is no book with this Accession number')
 
 <View style={{flex:1}}>  
 <LogOut />
+
+
 <View style={{...styles.center}}>
       <TextInput placeholder='Searchh Book by Accession Number' style={styles.textinput_text}
       value={search} onChangeText={(value)=>{setSearch(value)}}
@@ -47,6 +53,7 @@ Alert.alert('No Book Found','There is no book with this Accession number')
     </TouchableOpacity>
 
     </View>
+<Add />
     </View>
   )}
 export default AuthorSearch

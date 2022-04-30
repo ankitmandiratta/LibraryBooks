@@ -4,6 +4,7 @@ import { styles } from '../../style'
 import { COLORS } from '../../constants'
 import auth, { firebase } from '@react-native-firebase/auth'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import Add from '../Add'
 const SignIn = (props) => {
 const {navigation} = props
    const [email,setEmail] = useState('')
@@ -60,6 +61,8 @@ const {navigation} = props
 <TouchableOpacity onPress={()=>{navigation.navigate('SignUp')}}><Text>Not Registered!!!!</Text>
 <Text style={{color:COLORS.mitti,fontWeight:'bold'}}>Click here to SignUp</Text></TouchableOpacity>
 
+
+<View style={{marginTop:50}}><Add /></View>
 </View>
   )
 }

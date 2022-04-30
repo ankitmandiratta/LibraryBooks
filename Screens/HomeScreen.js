@@ -30,9 +30,8 @@ const HomeScreen = () => {
             },
             tabBarActiveTintColor:COLORS.brown,
             tabBarInactiveTintColor:COLORS.black
-
     })}
-    
+
     >
         <Tab.Screen name="Search" component={Search} options={{headerShown:false}} />
         <Tab.Screen name="Books" component={BookList} options={{headerShown:false}} />

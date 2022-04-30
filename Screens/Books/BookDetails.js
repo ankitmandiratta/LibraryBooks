@@ -5,6 +5,7 @@ import {Header,TextInputt,Btn} from '../../components'
 import { Provider } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 import { COLORS, SIZES } from '../../constants'
+import Add from '../Add'
 
 const BookDetails = (props) => {
   const {route} = props
@@ -63,6 +64,10 @@ const data= route.params.data
     </View>
 
     </View>
+
+<View style={{marginTop:50}}>
+<Add />
+</View>
 
    </View>
 

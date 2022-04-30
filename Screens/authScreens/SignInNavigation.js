@@ -4,9 +4,10 @@ import { createStackNavigator } from '@react-navigation/stack'
 import SignIn from './SignIn';
 import GetOtp from './GetOtp';
 import SignUp from './SignUp';
+
 import HomeScreen from '../HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
-
+import Main from '../Main';
 const Stack = createStackNavigator();
 const SignInNavigation = () => {
   return (
@@ -16,7 +17,7 @@ const SignInNavigation = () => {
       <Stack.Screen name="SignUp" component={SignUp} options={{headerShown:false}} />
         <Stack.Screen name="SignIn" component={SignIn} options={{headerShown:false}} />
         <Stack.Screen name="Get OTP" component={GetOtp}  options={{headerShown:false}} />
-        <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}} />
+
       </Stack.Navigator>
 
 

@@ -4,6 +4,7 @@ import { styles } from '../../style';
 import { firebase } from '@react-native-firebase/firestore';
 import LogOut from '../../components/LogOut';
 import { NavigationContainer } from '@react-navigation/native';
+import Add from '../Add';
 const TitleSearch = (props) => {
   const {navigation} = props
   const [search,setSearch] = useState('')
@@ -41,6 +42,7 @@ const TitleSearch = (props) => {
 
 
     </View>
+    <Add />
     </View>
   )}
 export default TitleSearch

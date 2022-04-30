@@ -18,8 +18,7 @@ const {navigation} = props
     </TouchableOpacity>
     </View>
   
-  )
-}
+  )}
 
 export default LogOut
 
