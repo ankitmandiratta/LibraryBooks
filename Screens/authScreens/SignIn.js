@@ -1,13 +1,18 @@
 import { View, Text,TextInput,TouchableOpacity,Modal,Alert } from 'react-native'
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import { styles } from '../../style'
 import { COLORS } from '../../constants'
 import auth, { firebase } from '@react-native-firebase/auth'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Add from '../Add'
+import { AuthContext } from '../../components/context'
+
 const SignIn = (props) => {
 const {navigation} = props
-   const [email,setEmail] = useState('')
+
+const {signIn} = useContext(AuthContext)
+
+  const [email,setEmail] = useState('')
    const [password,setPassword] = useState('')  
   
    
@@ -21,28 +26,26 @@ const {navigation} = props
     }
     else{
            console.log("Authenticae process") 
+           signIn(email,password)
 
-       firebase.auth().signInWithEmailAndPassword(email,password)
-       .then((user)=>{
-         if(user.user.emailVerified){
-  //         navigation.navigate("Home")
-  console.log(user)   
-  console.log('Move to Home')    
-  var uid =user.user.uid
-    Astorage(uid)
+    //    firebase.auth().signInWithEmailAndPassword(email,password)
+    //    .then((user)=>{
+    //      if(user.user.emailVerified){
+    //  var uid =user.user.uid
+    //    Astorage(uid)
+    //   }
+    //      else{
+    //        Alert.alert('Email verification Failed','Email is not verified.Please open your email account and verify')
+    //      }
+ // })
+       
 
-  }
-         else{
-           Alert.alert('Email verification Failed','Email is not verified.Please open your email account and verify')
-         }
-
-       })
     }
   }
 
   const Astorage =async(uid)=>{
     await AsyncStorage.setItem('userId',uid)
-    navigation.navigate('Home')
+    navigation.navigate('S')
   }
   return (
     <View style={styles.center}>

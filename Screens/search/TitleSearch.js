@@ -1,11 +1,17 @@
 import { Text, View,TouchableOpacity,TextInput,Alert } from 'react-native'
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { styles } from '../../style';
 import { firebase } from '@react-native-firebase/firestore';
 import LogOut from '../../components/LogOut';
 import { NavigationContainer } from '@react-navigation/native';
 import Add from '../Add';
+import { COLORS } from '../../constants';
+
 const TitleSearch = (props) => {
+
+  useEffect(()=>{
+Alert.alert('Important','Book Title must be searched in capital letters only ')
+  },[])
   const {navigation} = props
   const [search,setSearch] = useState('')
 
@@ -37,7 +43,7 @@ const TitleSearch = (props) => {
     </TouchableOpacity>
 
     <TouchableOpacity onPress={()=>navigation.navigate('Author')}>
-    <Text > Search By Accession Number</Text>
+    <Text style={{color:COLORS.blue}} >Click here to  Search By Accession Number</Text>
     </TouchableOpacity>
 
 
